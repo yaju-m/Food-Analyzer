@@ -29,12 +29,6 @@ class USDATableSpider(scrapy.Spider):
 			food= food.replace('\n', '')
 			self.ingredients[number]= food
 			print(self.ingredients)
-    			tds = tr.find_all('td')
-			tds[0]= re.sub('\s+', '', tds[0])
-			tds[1]= re.sub('\s+', '', tds[1])
-    		self.ingredients[tds[0].text]= tds[1].text
-    		print(self.ingredients)
-		
 process = CrawlerProcess({
     'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
