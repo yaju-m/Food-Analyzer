@@ -1,0 +1,15 @@
+{
+  "manifest_version": 1,
+
+  "name": "Food Facts Plugin",
+  "description": "This extension will return nutrition facts for recipes in a google search, and offer a healthier alternative",
+  "version": "1.0",
+
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "popup.html"
+  },
+  "permissions": [
+   "activeTab"
+   ]
+}
