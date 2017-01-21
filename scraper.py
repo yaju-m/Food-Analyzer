@@ -4,6 +4,7 @@ from scrapy.http import HtmlResponse
 from scrapy.crawler import CrawlerProcess
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+import re
 
 class USDATableSpider(scrapy.Spider):
 	ingredients= {}
@@ -20,6 +21,8 @@ class USDATableSpider(scrapy.Spider):
 		soup = BeautifulSoup(page)
 		for tr in soup.find_all('tr')[1:]:
     			tds = tr.find_all('td')
+			tds[0].text= re.sub('\s+', '', tds[0].text)
+			tds[1].text= re.sub('\s+', '', tds[1].text)
     			self.ingredients[tds[0].text]= tds[1].text
     			print(self.ingredients)
 		
