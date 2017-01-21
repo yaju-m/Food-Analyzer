@@ -20,14 +20,14 @@ class USDATableSpider(scrapy.Spider):
 		page = urlopen(url).read()
 		soup = BeautifulSoup(page)
 		for tr in soup.find_all('tr')[1:]:
-    			tds = tr.find_all('td')
+			tds = tr.find_all('td')
 			tds[0].text= re.sub('\s+', '', tds[0].text)
 			tds[1].text= re.sub('\s+', '', tds[1].text)
-    			self.ingredients[tds[0].text]= tds[1].text
-    			print(self.ingredients)
+			self.ingredients[tds[0].text]= tds[1].text
+			print(self.ingredients)
 		
 process = CrawlerProcess({
-    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+	'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
 
 process.crawl(USDATableSpider)
