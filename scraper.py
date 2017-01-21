@@ -20,6 +20,7 @@ class USDATableSpider(scrapy.Spider):
 		page = urlopen(url).read()
 		soup = BeautifulSoup(page)
 		for tr in soup.find_all('tr')[1:]:
+<<<<<<< HEAD
 			tds = tr.find_all('td')
 			number = str(tds[0].text)
 			food = str(tds[1].text)
@@ -29,6 +30,13 @@ class USDATableSpider(scrapy.Spider):
 			food= food.replace('\n', '')
 			self.ingredients[number]= food
 			print(self.ingredients)
+=======
+    			tds = tr.find_all('td')
+			tds[0]= re.sub('\s+', '', tds[0])
+			tds[1]= re.sub('\s+', '', tds[1])
+    			self.ingredients[tds[0].text]= tds[1].text
+    			print(self.ingredients)
+>>>>>>> 680501eec1c0db2da60d1d67b9934bf78a8fca1d
 		
 process = CrawlerProcess({
     'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
