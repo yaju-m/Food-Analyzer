@@ -1,5 +1,5 @@
 {
-  "manifest_version": 1,
+  "manifest_version": 2,
 
   "name": "Food Facts Plugin",
   "description": "This extension will return nutrition facts for recipes in a google search, and offer a healthier alternative",
