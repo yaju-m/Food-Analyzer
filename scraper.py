@@ -21,16 +21,19 @@ class USDATableSpider(scrapy.Spider):
 		soup = BeautifulSoup(page)
 		for tr in soup.find_all('tr')[1:]:
 			tds = tr.find_all('td')
-			tds[0].text= re.sub('\s+', '', tds[0].text)
-			tds[1].text= re.sub('\s+', '', tds[1].text)
-			self.ingredients[tds[0].text]= tds[1].text
+			number = str(tds[0].text)
+			food = str(tds[1].text)
+			number= number.replace('\t', '')
+			number= number.replace('\n', '')
+			food= food.replace('\t', '')
+			food= food.replace('\n', '')
+			self.ingredients[number]= food
 			print(self.ingredients)
 		
 process = CrawlerProcess({
-	'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
+    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
 
 process.crawl(USDATableSpider)
 process.start()	
 	
-		
