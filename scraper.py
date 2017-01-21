@@ -21,8 +21,8 @@ class USDATableSpider(scrapy.Spider):
 		soup = BeautifulSoup(page)
 		for tr in soup.find_all('tr')[1:]:
     			tds = tr.find_all('td')
-			tds[0]= re.sub('\s+', '', tds[0].text)
-			tds[1]= re.sub('\s+', '', tds[1].text)
+			tds[0]= re.sub('\s+', '', tds[0])
+			tds[1]= re.sub('\s+', '', tds[1])
     			self.ingredients[tds[0].text]= tds[1].text
     			print(self.ingredients)
 		
