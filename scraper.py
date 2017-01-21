@@ -28,7 +28,6 @@ class USDATableSpider(scrapy.Spider):
 			food= food.replace('\t', '')
 			food= food.replace('\n', '')
 			self.ingredients[number]= food
-		print(self.ingredients)
 process = CrawlerProcess({
     'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
