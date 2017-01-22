@@ -8,7 +8,7 @@ scraper.
 
 app = Flask(__name__)
 
-food_id= 
+food_id= scraper.call_this()
 
 @app.route('/food/<food_id>', methods = ['GET', 'POST'])
 def find_info(food_id):
