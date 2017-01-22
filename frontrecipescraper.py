@@ -11,7 +11,7 @@ class RecipeSpider(scrapy.Spider):
 	ingredients= {}
 	#variable assigned to input from user
 	name = 'recipe_spider'
-	current_url = ['https://allrecipes.com/recipes/'+ current_id]
+	current_url = ['https://allrecipes.com/recipes/'+ str(current_id)]
 	final_dict= {}
 	#startrequests()
 	#callback function will be a selector
