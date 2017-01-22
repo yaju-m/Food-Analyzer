@@ -20,6 +20,7 @@ class USDATableSpider(scrapy.Spider):
 	user_input = text_parser('6 pounds of bananas')[2] #variable assigned to input from user
 	name = 'USDA_table_spider'
 	start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
+	final_dict= {}
 	#startrequests()
 	#callback function will be a selector
 	#response = HtmlResponse(url=user_input, body=tbody) #url here depends on user input
@@ -37,7 +38,8 @@ class USDATableSpider(scrapy.Spider):
 			food= food.replace('\t', '')
 			food= food.replace('\n', '')
 			self.ingredients[food]= number
-		percent_similar(self.user_input, self.ingredients)
+		final_dict[0]= percent_similar(self.user_input, self.ingredients)
+		return final_dict
 process = CrawlerProcess({
     'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
