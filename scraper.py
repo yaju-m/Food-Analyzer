@@ -23,6 +23,7 @@ class USDATableSpider(scrapy.Spider):
 		self.ingredients= {}
 		result = text_parser(self.query) #variable assigned to input from user
 		self.user_input = result[2]
+		#print(result)
 		self.name = 'USDA_table_spider'
 		self.start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
 		self.final_dict= {}
@@ -51,5 +52,6 @@ class USDATableSpider(scrapy.Spider):
 def call_this(query):
 	query = query.replace("teaspoon", "tsp")
 	query = query.replace("teaspoons", "tsp")
+	query = query.replace("skinless", "no")
 	spidey = USDATableSpider(scrapy.Spider, query)
 	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))
