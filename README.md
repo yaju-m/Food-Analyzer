@@ -1,9 +1,9 @@
 # Food-App-FrontEnd
 
-Food Analyzer is a Chrome extension that uses Machine Learning and Natural Language Processing to instantaneously obtain relevant nutritional information for recipes and ingredients seen online.
+Food Analyzer is a Chrome extension that uses machine learning and natural language processing to instantaneously obtain relevant nutritional information for recipes found online.
 
 ![alt text](https://github.com/yaju-m/Food-App-FrontEnd/blob/master/FoodAnalyzer2.png "Example of Chrome Browser Extension")
 
-There were multiple parts during the development of this project. One of the main parts was the Chrome Extension that would continuously run in the background and analyze the contents of the recipes seen online. This was done through a web scraper that would aggregate information like the calorie count from the USDA Food Composition Database. In order to link the Chrome extension with the information gathered from the web scraper, we used the Natural Language Processing API from the Google Cloud Platform to analyze and categorize the relevant nutritional information.
+The development of our project involved a variety of technologies. One of the main parts was a Chrome Extension that would continuously analyze the contents of recipes seen online. This was done through a web scraper that would aggregate nutritional information from the USDA's Food Composition Database. In order to link the Chrome extension with nutritional information, we wrote another web scraper to extract from the ingredient list and used the Google Cloud Platform's Natural Language Processing API to analyze and categorize information in the recipe to generate specific calorie counts for each ingredient.
 
-To develop this extension, we used HTML/CSS/Javascript, Flask, jquery, the Google Cloud Platform's Natural Language Processing API, Beautiful-Soup, Scrapy, and Cheerio
+To develop this extension, we used HTML/CSS/Javascript, Flask, JQuery, the Google Cloud Platform's Natural Language Processing API, Beautiful-Soup, Scrapy, and Cheerio
