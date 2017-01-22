@@ -6,9 +6,6 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from GoogleNLP import parse as text_parser
 from difflib import SequenceMatcher
-import frontrecipescraper
-
-list_of_ingred= frontendrecipescraper.call_this()
 
 def percent_similar(query, ingredients):
 	percentages = [SequenceMatcher(None, query, i).ratio() for i in ingredients]
@@ -19,8 +16,6 @@ def percent_similar(query, ingredients):
 
 
 class USDATableSpider(scrapy.Spider):
-	counter= 0
-	final_dict = {}
 
 	def __init__(self, spider, query):
 		scrapy.Spider.__init__(self, spider)
@@ -29,6 +24,7 @@ class USDATableSpider(scrapy.Spider):
 		result = text_parser(self.query) #variable assigned to input from user
 		self.user_input = result[2]
 		#print(result)
+		self.final_dict = {}
 		self.name = 'USDA_table_spider'
 		self.start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
 
@@ -50,9 +46,8 @@ class USDATableSpider(scrapy.Spider):
 			food= food.replace('\t', '')
 			food= food.replace('\n', '')
 			self.ingredients[food]= number
-		final_dict[counter]= percent_similar(self.user_input, self.ingredients)
-		counter += 1
-		return final_dict
+		self.final_dict[0]= percent_similar(self.user_input, self.ingredients)
+		return self.final_dict
 
 def call_this(query):
 	query = query.replace("teaspoon", "tsp")
