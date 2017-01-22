@@ -9,6 +9,8 @@ from difflib import SequenceMatcher
 
 def percent_similar(query, ingredients):
 	percentages = [SequenceMatcher(None, query, i).ratio() for i in ingredients]
+	if not percentages:
+		return -1
 	best_match = max(percentages)
 	correct_index= percentages.index(best_match)
 	list_of_foods= list(ingredients.keys())
