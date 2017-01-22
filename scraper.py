@@ -6,6 +6,9 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from GoogleNLP import parse as text_parser
 from difflib import SequenceMatcher
+import frontrecipescraper
+
+list_of_ingred= frontendrecipescraper.call_this()
 
 def percent_similar(query, ingredients):
 	percentages = [SequenceMatcher(None, query, i).ratio() for i in ingredients]
@@ -16,6 +19,8 @@ def percent_similar(query, ingredients):
 
 
 class USDATableSpider(scrapy.Spider):
+	counter= 0
+	final_dict = {}
 
 	def __init__(self, spider, query):
 		scrapy.Spider.__init__(self, spider)
@@ -25,7 +30,6 @@ class USDATableSpider(scrapy.Spider):
 		self.user_input = result[2]
 		self.name = 'USDA_table_spider'
 		self.start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
-		self.final_dict= {}
 
 	#startrequests()
 	#callback function will be a selector
@@ -45,11 +49,14 @@ class USDATableSpider(scrapy.Spider):
 			food= food.replace('\t', '')
 			food= food.replace('\n', '')
 			self.ingredients[food]= number
-		self.final_dict[0]= percent_similar(self.user_input, self.ingredients)
-		return self.final_dict
+		final_dict[counter]= percent_similar(self.user_input, self.ingredients)
+		counter += 1
+		return final_dict
 
-def call_this(query):
-	query = query.replace("teaspoon", "tsp")
-	query = query.replace("teaspoons", "tsp")
-	spidey = USDATableSpider(scrapy.Spider, query)
-	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))
+def call_this(list_of_ingred):
+	while list_of_ingred:
+		query= list_of_ingred[0]
+		query = query.replace("teaspoon", "tsp")
+		query = query.replace("teaspoons", "tsp")
+		spidey = USDATableSpider(scrapy.Spider, query)
+		return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))
