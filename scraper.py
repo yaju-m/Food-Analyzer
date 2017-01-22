@@ -4,7 +4,6 @@ from scrapy.http import HtmlResponse
 from scrapy.crawler import CrawlerProcess
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-<<<<<<< HEAD
 from GoogleNLP import parse as text_parser
 from difflib import SequenceMatcher
 
@@ -15,10 +14,6 @@ def percent_similar(query, ingredients):
 	list_of_foods= list(ingredients.keys())
 	return ingredients[list_of_foods[correct_index]]
 
-=======
-import re
-from google nlp import parse as text_parser
->>>>>>> 554fc8760930603b6f975c0c037bf0cb8cf7c1d1
 
 class USDATableSpider(scrapy.Spider):
 	ingredients= {}
