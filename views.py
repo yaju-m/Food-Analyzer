@@ -1,9 +1,14 @@
 from flask import Flask 
 import json
 from urllib.request import urlopen
+import scraper
+
+scraper.
 
 
 app = Flask(__name__)
+
+food_id= 
 
 @app.route('/food/<food_id>', methods = ['GET', 'POST'])
 def find_info(food_id):
