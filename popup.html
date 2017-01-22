@@ -9,20 +9,40 @@
   </head>
   
   <style>
-		#topRow {
-					text-align:center;
-					color:#003B20;
-				}
-
-		#topRow h1 {
-					font-family: Roboto, sans-serif;
-				}
+	#topRow {
+		text-align:center;
+		color: black;
+		font-family: Roboto, sans-serif;
+		font-weight: bold;
+		}
+	  
+	 #pic {
+		background-image:
+		linear-gradient(
+			rgba(0, 0, 0, 0.65), 
+			rgba(0, 0, 0, 0.65)
+			), url("icontest.png");
+		width:100%;
+		background-size:cover;
+		margin-left: 0px;
+		margin-right: 0px;
+		display:block;
+		height:130px;
+		margin-top:-18px;                                                                        
+	}
+	  
+	 body{
+			margin:0px !important;
+			border-radius: 4px
+		}
   </style>
   
   <body>
-    <div id = "topRow" style = "background-color:#D4876A">
+  <div id = "pic">	  
+    <div id = "topRow" style = "background-color:white">
       <h1>Food Analyzer</h1>
-      <button id="checkPage">Analyze Your Food!</button>
+	    <p>Mouse over a recipe to find its calorie content!</p>
     </div>
+</div>
   </body>
 </html>
