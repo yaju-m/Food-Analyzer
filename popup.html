@@ -14,15 +14,35 @@
 		color: black;
 		font-family: Roboto, sans-serif;
 		font-weight: bold;
-
 		}
-
+	  
+	 #pic {
+		background-image:
+		linear-gradient(
+			rgba(0, 0, 0, 0.65), 
+			rgba(0, 0, 0, 0.65)
+			), url("icontest.png");
+		width:100%;
+		background-size:cover;
+		margin-left: 0px;
+		margin-right: 0px;
+		display:block;
+		height:130px;
+		margin-top:-18px;                                                                        
+	}
+	  
+	 body{
+			margin:0px !important;
+			border-radius: 4px
+		}
   </style>
   
   <body>
+  <div id = "pic">	  
     <div id = "topRow" style = "background-color:white">
       <h1>Food Analyzer</h1>
 	    <p>Mouse over a recipe to find its calorie content!</p>
     </div>
+</div>
   </body>
 </html>
