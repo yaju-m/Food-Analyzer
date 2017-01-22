@@ -52,6 +52,8 @@ def call_this(query):
 	query = query.replace("teaspoon", "tsp")
 	query = query.replace("teaspoons", "tsp")
 	query = query.replace("skinless", "no")
+	# TODO turn fractions into decimals
 	result = text_parser(query)
 	spidey = USDATableSpider(scrapy.Spider, result[2])
-	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))[0], result[0], result[1]
+	# (usda_code, quantity, potential units)
+	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))[0], result[0], result[1], result[2]
