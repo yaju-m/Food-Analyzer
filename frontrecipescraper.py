@@ -7,6 +7,8 @@ from urllib.request import urlopen
 from GoogleNLP import parse as text_parser
 from difflib import SequenceMatcher
 
+current_url= self.request.url
+
 def percent_similar(query, ingredients):
 	percentages = [SequenceMatcher(None, query, i).ratio() for i in ingredients]
 	best_match = max(percentages)
@@ -26,6 +28,8 @@ class RecipeSpider(scrapy.Spider):
 	#response = HtmlResponse(url=user_input, body=tbody) #url here depends on user input
 	#Selector(response=response).xpath('//span/text()').extract()
 	def parse(self, response):
+		if current_url.has_attr('href=/recipe/'): 
+			
 		list_of_recipes=[]
 		dict_of_recipes = {}
 		url= start_urls[0]
