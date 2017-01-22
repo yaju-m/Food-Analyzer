@@ -5,13 +5,13 @@ from scrapy.crawler import CrawlerProcess
 from bs4 import BeautifulSoup, SoupStrainer
 from urllib.request import urlopen
 
-current_url= self.request.url
+current_id = 0 
 
 class RecipeSpider(scrapy.Spider):
 	ingredients= {}
 	#variable assigned to input from user
 	name = 'recipe_spider'
-	start_urls = ['https://allrecipes.com/recipes/']
+	current_url = ['https://allrecipes.com/recipes/'+ current_id]
 	final_dict= {}
 	#startrequests()
 	#callback function will be a selector
@@ -21,13 +21,12 @@ class RecipeSpider(scrapy.Spider):
 		list_of_ingred=[]
 		dict_of_recipes = {}
 		counter= 0
-		if current_url.has_attr('href=/recipe/'): 
-			url= current_url
-			page= urlopen(url).read()
-			soup = BeautifulSoup(page)
-			for ul in soup.find_all('ul'): 
-				for li in soup.find_all('li', {'class': 'checklist__line'}): 
-					list_of_ingred += [li]
+		url= current_url
+		page= urlopen(url).read()
+		soup = BeautifulSoup(page)
+		for ul in soup.find_all('ul'): 
+			for li in soup.find_all('li', {'class': 'checklist__line'}): 
+				list_of_ingred += [li]
 		while list_of_ingred: 
 			dict_of_recipes[counter]= list_of_ingred[0]
 			counter += 1
