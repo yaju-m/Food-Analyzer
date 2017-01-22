@@ -3,9 +3,6 @@ import json
 from urllib.request import urlopen
 import scraper
 
-scraper.
-
-
 app = Flask(__name__)
 
 food_id= scraper.call_this()
