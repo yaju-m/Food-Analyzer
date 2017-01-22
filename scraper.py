@@ -40,10 +40,10 @@ class USDATableSpider(scrapy.Spider):
 			self.ingredients[food]= number
 		final_dict[0]= percent_similar(self.user_input, self.ingredients)
 		return final_dict
-process = CrawlerProcess({
-    'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
-})
 
-process.crawl(USDATableSpider)
-process.start()	
+def call_this():
+	spidey = USDATableSpider(scrapy.Spider)
+	return spidey.parse(HtmlResponse(url=self.start_urls[0] + self.user_input, bpdy=tbody))
+
+
 	
