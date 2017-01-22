@@ -38,12 +38,9 @@ class USDATableSpider(scrapy.Spider):
 			food= food.replace('\t', '')
 			food= food.replace('\n', '')
 			self.ingredients[food]= number
-		final_dict[0]= percent_similar(self.user_input, self.ingredients)
-		return final_dict
+		self.final_dict[0]= percent_similar(self.user_input, self.ingredients)
+		return self.final_dict
 
 def call_this():
 	spidey = USDATableSpider(scrapy.Spider)
-	return spidey.parse(HtmlResponse(url=self.start_urls[0] + self.user_input, bpdy=tbody))
-
-
-	
+	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))
