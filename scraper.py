@@ -58,7 +58,6 @@ def call_this(query):
 	query_list[0] = dec
 	processed_query = ' '.join(str(i) for i in query_list)
 	result = text_parser(processed_query)
-	result = text_parser(query)
 	spidey = USDATableSpider(scrapy.Spider, result[2])
 	# (usda_code, quantity, potential units)
 	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))[0], result[0], result[1], result[2]
