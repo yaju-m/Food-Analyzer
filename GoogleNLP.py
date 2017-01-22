@@ -4,8 +4,6 @@ def parse(text_content):
 
     client = language.Client()
 
-    #text_content = ("6 cups of sour cream")                          
-
     document = client.document_from_text(text_content)
 
     annotations = document.annotate_text()

@@ -19,7 +19,7 @@ def find_info(food_id):
 		food_data_json = json.loads(data)
 		nutrients = food_data_json['report']['food']['nutrients']
 		calories = [nutrient for nutrient in nutrients if nutrient['name'] == 'Energy' and nutrient['unit'] == 'kcal']
-		final_cal_dict[food_data_json['report']['food']['name']= calories
+		final_cal_dict[food_data_json['report']['food']['name']]= calories
 		count += 1
 	return final_cal_dict
 
