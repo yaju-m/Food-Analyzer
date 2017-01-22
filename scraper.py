@@ -26,7 +26,7 @@ class USDATableSpider(scrapy.Spider):
 		self.ingredients= {}
 		self.final_dict = {}
 		self.name = 'USDA_table_spider'
-		self.start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
+		self.start_urls = ['http://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
 
 	#startrequests()
 	#callback function will be a selector
@@ -35,6 +35,7 @@ class USDATableSpider(scrapy.Spider):
 	def parse(self, response):
 		url = self.start_urls[0] + self.user_input  # change to whatever your url is
 		url = url.replace(" ", "%20")
+		print(url)
 		page = urlopen(url).read()
 		soup = BeautifulSoup(page)
 		for tr in soup.find_all('tr')[1:]:

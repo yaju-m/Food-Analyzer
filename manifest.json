@@ -15,6 +15,7 @@
     "content_scripts": [
     {
         "matches": ["*://*.allrecipes.com/*"],
+        "css": ["materialize.css", "content.css"],
         "js": ["jquery.js", "async.js", "myscript.js"],
         "run_at": "document_end"
     }

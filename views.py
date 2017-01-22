@@ -6,6 +6,8 @@ import frontrecipescraper
 
 app = Flask(__name__)
 
+results_cache = {}
+
 def find_info(food_id):
 	url = 'http://api.nal.usda.gov/ndb/reports/?ndbno=' + str(food_id) + '&type=f&format=json&api_key=MwnyVL03A2RfWW6eKQlbvNyVarwDeuA6mHARuZ5k'
 	print(url)
@@ -18,6 +20,11 @@ def find_info(food_id):
 
 @app.route('/calories/<recipe_id>', methods=['GET'])
 def calculate_calories(recipe_id):
+
+	if recipe_id in results_cache:
+		results = results_cache[recipe_id]
+		return jsonify(**results)
+
 	ingredients = frontrecipescraper.call_this(recipe_id) 
 	print('\n\n\nasdf2', ingredients, type(ingredients), '\n\n\n')
 	
@@ -37,7 +44,8 @@ def calculate_calories(recipe_id):
 		results[name] = calories
 	
 	results['total']  = sum(results.values())	
-				
+	results_cache[recipe_id] = results	
+			
 	return jsonify(**results)
 
 	

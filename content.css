@@ -1,0 +1,11 @@
+.fade {
+    -webkit-animation: fadeInOut 3s infinite; /* Safari, Chrome and Opera > 12.1 */
+            animation: fadeInOut 3s infinite;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0 }
+    33% { opacity: 1 }
+    66% {opacity: 1 }
+    99% { opacity: 0 }
+}
