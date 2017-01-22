@@ -17,26 +17,34 @@ def percent_similar(query, ingredients):
 
 class USDATableSpider(scrapy.Spider):
 	ingredients= {}
-	user_input = text_parser('6 pounds of bananas')[2] #variable assigned to input from user
+	#variable assigned to input from user
 	name = 'USDA_table_spider'
-	start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
+	start_urls = ['https://allrecipes.com/recipes/']
 	final_dict= {}
 	#startrequests()
 	#callback function will be a selector
 	#response = HtmlResponse(url=user_input, body=tbody) #url here depends on user input
 	#Selector(response=response).xpath('//span/text()').extract()
 	def parse(self, response):
-		url = self.start_urls[0] + self.user_input  # change to whatever your url is
-		page = urlopen(url).read()
+		list_of_recipes=[]
+		url= start_urls[0]
+		page= urlopen(url).read()
 		soup = BeautifulSoup(page)
-		for tr in soup.find_all('tr')[1:]:
-			tds = tr.find_all('td')
+		for h3 in soup.find_all('h3')[:]:
+			atags = h3.find_all('a')
+			list_of_recipes += [atags]
+			url = self.start_urls[0] +   # change to whatever your url is
+			page = urlopen(url).read()
+			
+			
 			number = str(tds[0].text)
 			food = str(tds[1].text)
 			number= number.replace('\t', '')
 			number= number.replace('\n', '')
 			food= food.replace('\t', '')
 			food= food.replace('\n', '')
+			
+			
 			self.ingredients[food]= number
 		self.final_dict[0]= percent_similar(self.user_input, self.ingredients)
 		return self.final_dict
