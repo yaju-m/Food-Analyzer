@@ -6,7 +6,7 @@ import scraper
 
 app = Flask(__name__)
 
-food_id= scraper.call_this()
+#food_id= scraper.call_this()
 
 #@app.route('/food/<food_id>', methods = ['GET', 'POST'])
 def find_info(food_id):
@@ -14,6 +14,7 @@ def find_info(food_id):
 	count= 0
 	while count <= len(food_id):
 		url = 'http://api.nal.usda.gov/ndb/reports/?ndbno=' + str(food_id[count]) + '&type=f&format=json&api_key=3MNz36md1IPX44kwQVKy4s6z3OIC1akW4hRK3qlR'
+		print(url)
 		http = urlopen(url)
 		data = http.read().decode('utf-8')
 		food_data_json = json.loads(data)
@@ -25,9 +26,13 @@ def find_info(food_id):
 
 @app.route('/calories/<recipe_id>', methods=['GET'])
 def calculate_calories(recipe_id):
-	ingredients = some_function()
+	#ingredients = some_function()
+	ingredients = ['chicken']
 	for ingredient in ingredients:
 		usda_code = scraper.call_this(ingredient)[0]
-		cal_dict = find_info(usda_code)
+		cal_dict = find_info('07935')
 		print(cal_dict)
-		
+	
+
+if __name__ == "__main__":
+	app.run(debug=True)	
