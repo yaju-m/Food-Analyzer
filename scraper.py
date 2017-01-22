@@ -4,13 +4,23 @@ from scrapy.http import HtmlResponse
 from scrapy.crawler import CrawlerProcess
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
-import re
+from GoogleNLP import parse as text_parser
+from difflib import SequenceMatcher
+
+def percent_similar(query, ingredients):
+	percentages = [SequenceMatcher(None, query, i).ratio() for i in ingredients]
+	best_match = max(percentages)
+	correct_index= percentages.index(best_match)
+	list_of_foods= list(ingredients.keys())
+	return ingredients[list_of_foods[correct_index]]
+
 
 class USDATableSpider(scrapy.Spider):
 	ingredients= {}
-	user_input = 'x' #variable assigned to input from user
+	user_input = text_parser('6 pounds of bananas')[2] #variable assigned to input from user
 	name = 'USDA_table_spider'
 	start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
+	final_dict= {}
 	#startrequests()
 	#callback function will be a selector
 	#response = HtmlResponse(url=user_input, body=tbody) #url here depends on user input
@@ -27,7 +37,9 @@ class USDATableSpider(scrapy.Spider):
 			number= number.replace('\n', '')
 			food= food.replace('\t', '')
 			food= food.replace('\n', '')
-			self.ingredients[number]= food
+			self.ingredients[food]= number
+		final_dict[0]= percent_similar(self.user_input, self.ingredients)
+		return final_dict
 process = CrawlerProcess({
     'USER_AGENT': 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)'
 })
