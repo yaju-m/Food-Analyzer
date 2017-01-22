@@ -21,7 +21,8 @@ class USDATableSpider(scrapy.Spider):
 		scrapy.Spider.__init__(self, spider)
 		self.query = query
 		self.ingredients= {}
-		self.user_input = text_parser(self.query)[2] #variable assigned to input from user
+		result = text_parser(self.query) #variable assigned to input from user
+		self.user_input = result[2]
 		self.name = 'USDA_table_spider'
 		self.start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
 		self.final_dict= {}
@@ -32,6 +33,7 @@ class USDATableSpider(scrapy.Spider):
 	#Selector(response=response).xpath('//span/text()').extract()
 	def parse(self, response):
 		url = self.start_urls[0] + self.user_input  # change to whatever your url is
+		url = url.replace(" ", "%20")
 		page = urlopen(url).read()
 		soup = BeautifulSoup(page)
 		for tr in soup.find_all('tr')[1:]:
@@ -47,5 +49,7 @@ class USDATableSpider(scrapy.Spider):
 		return self.final_dict
 
 def call_this(query):
+	query = query.replace("teaspoon", "tsp")
+	query = query.replace("teaspoons", "tsp")
 	spidey = USDATableSpider(scrapy.Spider, query)
 	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))
