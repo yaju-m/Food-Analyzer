@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 food_id= scraper.call_this()
 
-@app.route('/food/<food_id>', methods = ['GET', 'POST'])
+#@app.route('/food/<food_id>', methods = ['GET', 'POST'])
 def find_info(food_id):
 	final_cal_dict= {}
 	count= 0
@@ -22,3 +22,12 @@ def find_info(food_id):
 		final_cal_dict[food_data_json['report']['food']['name']= calories
 		count += 1
 	return final_cal_dict
+
+@app.route('/calories/<recipe_id>', methods=['GET'])
+def calculate_calories(recipe_id):
+	ingredients = some_function()
+	for ingredient in ingredients:
+		usda_code = scraper.call_this(ingredient)[0]
+		cal_dict = find_info(usda_code)
+		print(cal_dict)
+		
