@@ -1,4 +1,4 @@
-var URL = 'http://localhost:3000/';
+var URL = 'http://localhost:5000/';
 //var URL = 'http://107.170.77.233:3000/';
 
 console.log('TEST TEST TEST');
@@ -31,7 +31,7 @@ for (var i=0; i<parsedItems.length; i++) {
             return function() {
                 // mouse enter
                 var xhr = new XMLHttpRequest();
-                xhr.open('GET', URL+'calculate/'+id, true);
+                xhr.open('GET', URL+'calories/'+id, true);
                 xhr.onload = function() {
                     if (xhr.readyState == 4) {
                         console.log(xhr.responseText);
