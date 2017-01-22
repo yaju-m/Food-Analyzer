@@ -16,11 +16,15 @@ def percent_similar(query, ingredients):
 
 
 class USDATableSpider(scrapy.Spider):
-	ingredients= {}
-	user_input = text_parser('6 pounds of bananas')[2] #variable assigned to input from user
-	name = 'USDA_table_spider'
-	start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
-	final_dict= {}
+
+	def __init__(self, spider, query):
+		scrapy.Spider.__init__(self, spider)
+		self.query = query
+		self.ingredients= {}
+		self.user_input = text_parser(self.query)[2] #variable assigned to input from user
+		self.name = 'USDA_table_spider'
+		self.start_urls = ['https://ndb.nal.usda.gov/ndb/search/list?ds=Standard%20Reference&qlookup=']
+		self.final_dict= {}
 	#startrequests()
 	#callback function will be a selector
 	#response = HtmlResponse(url=user_input, body=tbody) #url here depends on user input
@@ -41,6 +45,6 @@ class USDATableSpider(scrapy.Spider):
 		self.final_dict[0]= percent_similar(self.user_input, self.ingredients)
 		return self.final_dict
 
-def call_this():
-	spidey = USDATableSpider(scrapy.Spider)
+def call_this(query):
+	spidey = USDATableSpider(scrapy.Spider, query)
 	return spidey.parse(HtmlResponse(url=spidey.start_urls[0] + spidey.user_input))
