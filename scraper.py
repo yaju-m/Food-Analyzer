@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 from GoogleNLP import parse as text_parser
 from difflib import SequenceMatcher
+from fractions import Fraction
 
 def percent_similar(query, ingredients):
 	percentages = [SequenceMatcher(None, query, i).ratio() for i in ingredients]
@@ -52,7 +53,11 @@ def call_this(query):
 	query = query.replace("teaspoon", "tsp")
 	query = query.replace("teaspoons", "tsp")
 	query = query.replace("skinless", "no")
-	# TODO turn fractions into decimals
+	query_list = query.split()
+	dec = float(Fraction(query_list[0]))
+	query_list[0] = dec
+	processed_query = ' '.join(str(i) for i in query_list)
+	result = text_parser(processed_query)
 	result = text_parser(query)
 	spidey = USDATableSpider(scrapy.Spider, result[2])
 	# (usda_code, quantity, potential units)
