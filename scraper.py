@@ -5,6 +5,7 @@ from scrapy.crawler import CrawlerProcess
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import re
+from google nlp import parse as text_parser
 
 class USDATableSpider(scrapy.Spider):
 	ingredients= {}
